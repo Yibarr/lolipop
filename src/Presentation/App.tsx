@@ -1,6 +1,4 @@
 import React from 'react';
-import logo from '../Resources/logo.svg';
-import './App.css';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import Divider from '@mui/material/Divider';
@@ -8,41 +6,36 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import DirectionsIcon from '@mui/icons-material/Directions';
+import './App.css';
+
+const paperStyle = {
+  p: '2px 4px',
+  display: 'flex',
+  alignItems: 'center',
+  width: 300,
+  heigth: 300,
+  justifyContent: 'center',
+  
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className='pond'>
+      <div className='froggy-1'>
         <Paper
-          component="form"
-          sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
-        >
-          <IconButton sx={{ p: '10px' }} aria-label="menu">
-            <MenuIcon />
-          </IconButton>
+          component='form'
+          sx={paperStyle}
+        >         
           <InputBase
             sx={{ ml: 1, flex: 1 }}
-            placeholder="Search Google Maps"
+            placeholder='Summoner'
             inputProps={{ 'aria-label': 'search google maps' }}
           />
-          <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+          <IconButton type='button' sx={{ p: '10px' }} aria-label='search'>
             <SearchIcon />
           </IconButton>
-          <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-          <IconButton color="primary" sx={{ p: '10px' }} aria-label="directions">
-            <DirectionsIcon />
-          </IconButton>
         </Paper>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </div>
     </div>
   );
 }
