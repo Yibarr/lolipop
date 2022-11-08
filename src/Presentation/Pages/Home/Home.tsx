@@ -12,6 +12,7 @@ function Home() {
       <Navbar/>
       
       <div className = 'Home_Container' >
+        
         <Paper
           component='form'
           sx={{
