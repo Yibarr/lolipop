@@ -1,6 +1,7 @@
-.Home_Container{
+.home_container{
     display: flex;
+    align-items: center;
     justify-content: center;
-    justify-items: center;
-    height: 50px;
+    flex-direction: column;
+    height: 100vh;
 }
