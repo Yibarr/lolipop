@@ -3,55 +3,77 @@ import SearchBarViewModel from "./SearchBarViewModel";
 import {
   Paper,
   InputBase,
-  IconButton
+  IconButton,
+  CircularProgress
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import {
+    Search,
+    CancelOutlined,
+    ErrorOutline
+} from "@mui/icons-material";
 import "./SearchBar.css"
 
 export default function SearchBar() {
-    const { getSummoners, summoners, error } = SearchBarViewModel();
+    const { getSummoner, summoner, error, loading } = SearchBarViewModel();
 
     const [userQuery, setUserQuery] = useState('');
 
     const searchUserQuery: FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
-        getSummoners(userQuery);
-};
+        getSummoner(userQuery);
+    };
 
-  return (
-    <Fragment>
-        <div className="search-container">
-            <Paper
-            component="form"
-            onSubmit={searchUserQuery}
-            className="form-container"
-            >
-                <InputBase
-                    type='text'
-                    sx={{ ml: 1, flex: 1 }}
-                    placeholder="Pokémon por id o nombre"
-                    value={userQuery}
-                    onChange={(e) => setUserQuery(e.target.value)}
-                    />
-                <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
-                    <SearchIcon />
-                </IconButton>
-            </Paper>
-            {error
-                ?
-                    <Paper>
-                        Error
-                    </Paper>
-                :
-                    summoners.map((summoner, i) => {
-                        return (
-                            <Paper key={summoner.id}>
-                                {summoner.summonername}
-                            </Paper>
-                        );
-                    })
+    const searchOutput = () => {
+        if(error) {
+            return <div>
+                <ErrorOutline/>
+                <p>Hubo un error al buscar el pokémon</p>
+            </div>
+        } else if (summoner !== undefined) {
+            if (summoner.sprite !== null) {
+                return <div>
+                    {summoner.summonername}
+                    <img src={summoner.sprite} alt="Pokemon sprite"></img>
+                </div>
+            } else {
+                return <div>
+                    {summoner.summonername}
+                    <CancelOutlined/>
+                </div>
             }
-        </div>
-    </Fragment>
+        }
+    };
+
+    const dynamicSearchIcon = () => {
+        if(loading) {
+            return <CircularProgress />
+        } else {
+            return <IconButton type="submit" aria-label="search">
+                <Search/>
+            </IconButton>
+        }
+    }
+
+    return (
+        <Fragment>
+            <div className="search-container">
+                <Paper
+                    component="form"
+                    onSubmit={searchUserQuery}
+                    className="form-container"
+                >
+                    <InputBase
+                        type='text'
+                        placeholder="Pokémon por id o nombre"
+                        value={userQuery}
+                        onChange={(e) => setUserQuery(e.target.value)}
+                        />
+                    {dynamicSearchIcon()}
+                </Paper>
+                <Paper>
+                    {searchOutput()}
+                </Paper>
+            </div>
+        </Fragment>
   );
 }

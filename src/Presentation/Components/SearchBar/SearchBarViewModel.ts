@@ -5,25 +5,35 @@ import { SummonerModel } from "../../../Domain/Model/SummonerModel";
 import { SummonerUseCase } from "../../../Domain/UseCases/SummonerUseCase";
 
 export default function SearchBarViewModel() {
-  const [summoners, setSummoners] = useState<SummonerModel[]>([]);
-  const [error, setError] = useState(false)
+  const [summoner, setSummoner] = useState<SummonerModel | undefined>();
+  const [error, setError] = useState<Boolean>(false)
+  const [loading, setLoading] = useState<Boolean>(false)
 
-  const UseCase = new SummonerUseCase(
+  const SearchUseCase = new SummonerUseCase(
     new LeagueAPIServices(new LeagueAPIDataManager())
   );
 
-  async function getSummoners(input: string) {
+  async function getSummoner(input: string) {
     try {
+      debugger
         setError(false)
-        setSummoners(await UseCase.invoke(input))   
+        setLoading(true)
+        if (input.length > 0) {
+          setSummoner(await SearchUseCase.invoke(input))  
+        } else {
+          setSummoner(undefined)
+        }
+        setLoading(false)
     } catch (error) {
         setError(true)
+        setLoading(false)
     }
   }
 
   return {
-    getSummoners,
-    summoners,
-    error
+    getSummoner,
+    summoner,
+    error,
+    loading
   };
 }

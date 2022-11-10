@@ -1,4 +1,3 @@
-import { SummonerModel } from "../../Domain/Model/SummonerModel";
 import LeagueAPIDataSource from "../LeagueAPIDataSource";
 import { SummonerAPIResponse } from "./Entity/SummonerAPIResponse";
 
@@ -13,14 +12,11 @@ function myFetch<T>(...args: any): Promise<TypedResponse<T>> {
 }
 
 export default class LeagueAPIDataManager implements LeagueAPIDataSource {
-  async getSummoner(input: string): Promise<SummonerModel[]> {
+  async getSummoner(input: string): Promise<SummonerAPIResponse> {
     try {
         let response = await myFetch<SummonerAPIResponse>(`${BASE_URL}/pokemon/${input}`);
         let data = await response.json();
-        return [{
-        id: data.id,
-        summonername: `${data.name}`,
-        }]
+        return data
     } catch(e) {
         throw e
     }
