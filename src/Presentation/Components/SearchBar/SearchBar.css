@@ -1,13 +1,5 @@
-.search-container {
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-}
-
 .form-container{
-    display: "flex";
-    align-items: "center";
-    width: 300px;
-    justify-content: center;
-    margin-bottom: 60px;
+    padding-left: 8PX;
+    height: 40PX;
+    width: 243px;
 }

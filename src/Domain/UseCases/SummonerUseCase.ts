@@ -10,10 +10,16 @@ export class SummonerUseCase {
       }
 
       async invoke(input: string): Promise<SummonerModel> {
-        let summonerResponse: SummonerAPIResponse = await this.repository.getSummoner(input)
+        const query: string = input.toLowerCase().trim();
+        const summonerResponse: SummonerAPIResponse = await this.repository.getSummoner(query)
+        const summonerName: string = summonerResponse
+          .name
+          .toLowerCase()
+          .replace(/\w/, firstLetter => firstLetter.toUpperCase());
+
         return {
           id: summonerResponse.id,
-          summonername: summonerResponse.name,
+          summonername: summonerName,
           sprite: summonerResponse.sprites.front_default
         }
       }

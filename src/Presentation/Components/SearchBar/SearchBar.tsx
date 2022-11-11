@@ -1,79 +1,43 @@
-import { FormEventHandler, Fragment, useState } from "react";
-import SearchBarViewModel from "./SearchBarViewModel";
+import { FormEventHandler, Fragment, useState, ComponentType } from "react";
 import {
   Paper,
   InputBase,
-  IconButton,
-  CircularProgress
+  IconButton
 } from "@mui/material";
-import {
-    Search,
-    CancelOutlined,
-    ErrorOutline
-} from "@mui/icons-material";
-import "./SearchBar.css"
+import "./SearchBar.css";
 
-export default function SearchBar() {
-    const { getSummoner, summoner, error, loading } = SearchBarViewModel();
+interface ButtonProps {
+    Icon: ComponentType,
+    onSearch: (query: string) => void,
+    disabled: boolean
+};
+
+export function SearchBar({ Icon, onSearch, disabled }: ButtonProps) {
 
     const [userQuery, setUserQuery] = useState('');
 
-    const searchUserQuery: FormEventHandler<HTMLFormElement> = (e) => {
+    const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
-        getSummoner(userQuery);
-    };
-
-    const searchOutput = () => {
-        if(error) {
-            return <div>
-                <ErrorOutline/>
-                <p>Hubo un error al buscar el pokémon</p>
-            </div>
-        } else if (summoner !== undefined) {
-            if (summoner.sprite !== null) {
-                return <div>
-                    {summoner.summonername}
-                    <img src={summoner.sprite} alt="Pokemon sprite"></img>
-                </div>
-            } else {
-                return <div>
-                    {summoner.summonername}
-                    <CancelOutlined/>
-                </div>
-            }
-        }
-    };
-
-    const dynamicSearchIcon = () => {
-        if(loading) {
-            return <CircularProgress />
-        } else {
-            return <IconButton type="submit" aria-label="search">
-                <Search/>
-            </IconButton>
-        }
-    }
+        onSearch(userQuery)
+      };
 
     return (
         <Fragment>
-            <div className="search-container">
-                <Paper
-                    component="form"
-                    onSubmit={searchUserQuery}
-                    className="form-container"
-                >
-                    <InputBase
-                        type='text'
-                        placeholder="Pokémon por id o nombre"
-                        value={userQuery}
-                        onChange={(e) => setUserQuery(e.target.value)}
-                        />
-                    {dynamicSearchIcon()}
-                </Paper>
-                <Paper>
-                    {searchOutput()}
-                </Paper>
-            </div>
+            <Paper
+                component="form"
+                onSubmit={onSubmit}
+                className="form-container"
+            >
+                <InputBase
+                    type='text'
+                    placeholder="Pokémon por id o nombre"
+                    value={userQuery}
+                    onChange={(e) => setUserQuery(e.target.value)}
+                    />
+                <IconButton type="submit" aria-label="search" disabled={disabled}>
+                    <Icon/>
+                </IconButton>
+            </Paper>
         </Fragment>
   );
-}
+};
