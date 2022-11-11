@@ -1,5 +1,5 @@
-import { SummonerModel } from "../../Domain/Model/SummonerModel";
+import { SummonerAPIResponse } from "../../Data/API/Entity/SummonerAPIResponse";
 
 export interface LeagueAPIRepository {
-  getSummoner(input: string): Promise<SummonerModel[]>;
+  getSummoner(input: string): Promise<SummonerAPIResponse >;
 }

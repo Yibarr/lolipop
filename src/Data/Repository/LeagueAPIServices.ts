@@ -1,4 +1,4 @@
-import { SummonerModel } from "../../Domain/Model/SummonerModel"
+import { SummonerAPIResponse } from "../../Data/API/Entity/SummonerAPIResponse"
 import { LeagueAPIRepository } from "./LeagueRepository";
 import LeagueAPIDataSource from "../LeagueAPIDataSource";
 
@@ -9,7 +9,7 @@ export class LeagueAPIServices implements LeagueAPIRepository {
     this.dataSource = _datasource;
   }
 
-  async getSummoner(input: string): Promise<SummonerModel[]> {
+  async getSummoner(input: string): Promise<SummonerAPIResponse> {
     return this.dataSource.getSummoner(input);
   }
 }

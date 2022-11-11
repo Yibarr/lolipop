@@ -1,7 +1,23 @@
-.home_container{
+.search-bar-container {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     flex-direction: column;
-    height: 100vh;
+    height: 45vh;
+}
+
+.element-cards-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20vh 0 20vh;
+}
+
+.paper-search-width {
+    width: 243px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
 }

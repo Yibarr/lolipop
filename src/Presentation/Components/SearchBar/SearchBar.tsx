@@ -1,57 +1,43 @@
-import { FormEventHandler, Fragment, useState } from "react";
-import SearchBarViewModel from "./SearchBarViewModel";
+import { FormEventHandler, Fragment, useState, ComponentType } from "react";
 import {
   Paper,
   InputBase,
   IconButton
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import "./SearchBar.css"
+import "./SearchBar.css";
 
-export default function SearchBar() {
-    const { getSummoners, summoners, error } = SearchBarViewModel();
+interface ButtonProps {
+    Icon: ComponentType,
+    onSearch: (query: string) => void,
+    disabled: boolean
+};
+
+export function SearchBar({ Icon, onSearch, disabled }: ButtonProps) {
 
     const [userQuery, setUserQuery] = useState('');
 
-    const searchUserQuery: FormEventHandler<HTMLFormElement> = (e) => {
+    const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
-        getSummoners(userQuery);
-};
+        onSearch(userQuery)
+      };
 
-  return (
-    <Fragment>
-        <div className="search-container">
+    return (
+        <Fragment>
             <Paper
-            component="form"
-            onSubmit={searchUserQuery}
-            className="form-container"
+                component="form"
+                onSubmit={onSubmit}
+                className="form-container"
             >
                 <InputBase
                     type='text'
-                    sx={{ ml: 1, flex: 1 }}
                     placeholder="Pokémon por id o nombre"
                     value={userQuery}
                     onChange={(e) => setUserQuery(e.target.value)}
                     />
-                <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
-                    <SearchIcon />
+                <IconButton type="submit" aria-label="search" disabled={disabled}>
+                    <Icon/>
                 </IconButton>
             </Paper>
-            {error
-                ?
-                    <Paper>
-                        Error
-                    </Paper>
-                :
-                    summoners.map((summoner, i) => {
-                        return (
-                            <Paper key={summoner.id}>
-                                {summoner.summonername}
-                            </Paper>
-                        );
-                    })
-            }
-        </div>
-    </Fragment>
+        </Fragment>
   );
-}
+};

@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 import AppBar from '@mui/material/AppBar';
 import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,9 +8,7 @@ import GlobalStyles from '@mui/material/GlobalStyles';
 
 function Navbar() {
     return (
-    
-      <div className = "navbar">
-      <React.Fragment>
+      <Fragment>
              <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
           <CssBaseline />
               <AppBar
@@ -52,10 +50,7 @@ function Navbar() {
           
            </Toolbar>
            </AppBar>
-      
-     
-        </React.Fragment>
-      </div>
+        </Fragment>
       );
 }      
       export default Navbar;
