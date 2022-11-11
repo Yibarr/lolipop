@@ -24,7 +24,6 @@
 
 .paper-search-width {
     width: 243px;
-    padding: 8px;
     display: flex;
     flex-direction: column-reverse;
     justify-content: center;

@@ -31,7 +31,7 @@ function Home() {
 
   const loader = () => {
     if(loading) {
-      return <LinearProgress style={{ width: 243 }}/>
+      return <LinearProgress style={{ width: "243px" }}/>
     };
   };
 
