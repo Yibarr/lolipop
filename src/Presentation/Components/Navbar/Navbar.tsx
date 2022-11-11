@@ -12,7 +12,8 @@ function Navbar() {
       <AppBar
         position="static"
         elevation={0}
-        sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+        sx={{
+          borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
           backgroundColor: "#110319"
         }}
       >
