@@ -26,14 +26,15 @@ function Home() {
   const searchUserQuery = (query: string) => {
     if(!loading) {
         getSummoner(query);
-    } 
+    };
   };
 
   const loader = () => {
     if(loading) {
       return <LinearProgress style={{ width: 243 }}/>
-    } 
- }
+    };
+  };
+
   const searchOutput = () => {
       if(error) {
           return <Paper className="paper-search-width">
@@ -46,34 +47,40 @@ function Home() {
           if (summoner.sprite !== null) {
               return <Paper className="paper-search-width">
                   <Typography>
-                  {summoner.id} {summoner.summonername}
+                    {summoner.id} {summoner.summonername}
                   </Typography>
                   <img src={summoner.sprite} alt="Pokemon sprite"></img>
               </Paper>
           } else {
               return <Paper className="paper-search-width">
                   <Typography>
-                  {summoner.id} {summoner.summonername}
+                    {summoner.id} {summoner.summonername}
                   </Typography>
                   <CancelOutlined style={{ fontSize: 96 }}/>
               </Paper>
-          }
-      }
+          };
+      };
   };
 
   return(
     <Fragment>
-      <Navbar/>
-      <div className="search-bar-container">
-          <SearchBar Icon={Search} onSearch={searchUserQuery} disabled={loading}/>
-      </div>
-      <div className="element-cards-container">
-        {loader()}
-        {searchOutput() }
+      <div className="home-container">
+        <Navbar/>
+        <div className="search-bar-container">
+            <SearchBar
+              Icon={Search}
+              onSearch={searchUserQuery}
+              disabled={loading}
+              placeholder={"Pokémon"}
+            />
+        </div>
+        <div className="element-card">
+          {loader()}
+          {searchOutput()}
+        </div>
       </div>
     </Fragment>
   );
-  
-}
+};
 
 export default Home;
