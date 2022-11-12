@@ -9,16 +9,17 @@ import "./SearchBar.css";
 interface ButtonProps {
     Icon: ComponentType,
     onSearch: (query: string) => void,
-    disabled: boolean
+    disabled: boolean,
+    placeholder: string
 };
 
-export function SearchBar({ Icon, onSearch, disabled }: ButtonProps) {
+export function SearchBar({ Icon, onSearch, disabled, placeholder }: ButtonProps) {
 
-    const [userQuery, setUserQuery] = useState('');
+    const [userQuery, setUserQuery] = useState("");
 
     const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
-        onSearch(userQuery)
+        onSearch(userQuery);
       };
 
     return (
@@ -30,10 +31,10 @@ export function SearchBar({ Icon, onSearch, disabled }: ButtonProps) {
             >
                 <InputBase
                     type='text'
-                    placeholder="Pokémon por id o nombre"
+                    placeholder={placeholder}
                     value={userQuery}
                     onChange={(e) => setUserQuery(e.target.value)}
-                    />
+                />
                 <IconButton type="submit" aria-label="search" disabled={disabled}>
                     <Icon/>
                 </IconButton>

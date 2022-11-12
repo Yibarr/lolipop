@@ -1,3 +1,12 @@
+.home-container {
+    height: 100vh;
+    width: 100vw;
+    background-image: url(/src/Resources/imgHome.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-color: #110319;
+}
+
 .search-bar-container {
     display: flex;
     align-items: center;
@@ -6,7 +15,7 @@
     height: 45vh;
 }
 
-.element-cards-container {
+.element-card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,7 +24,6 @@
 
 .paper-search-width {
     width: 243px;
-    padding: 8px;
     display: flex;
     flex-direction: column-reverse;
     justify-content: center;
