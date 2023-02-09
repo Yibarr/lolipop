@@ -20,7 +20,8 @@ export class SummonerUseCase {
         return {
           id: summonerResponse.id,
           summonername: summonerName,
-          sprite: summonerResponse.sprites.front_default
+          sprite: summonerResponse.sprites.front_default,
+          experence : summonerResponse.base_experience
         }
       }
 }
