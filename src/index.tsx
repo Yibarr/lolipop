@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './Presentation/index.css';
-import Home from './Presentation/Pages/Home/Home';
 import reportWebVitals from './reportWebVitals';
+import router from './routes';
+import { RouterProvider } from 'react-router-dom';
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Home />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

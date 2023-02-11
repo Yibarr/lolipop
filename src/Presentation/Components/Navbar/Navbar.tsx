@@ -6,6 +6,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Link from '@mui/material/Link';
 
+
 function Navbar() {
   return (
     <Fragment>
@@ -20,23 +21,23 @@ function Navbar() {
         <Toolbar sx={{ flexWrap: 'wrap' }}>
           <Home/>
           <nav>
-            <Link
+            <Link 
               variant="button"
-              href="#"
+              href="/"
               sx={{ my: 1, mx: 1.5, color: "#FFFF" }}
             >
               Builds
             </Link>
             <Link
               variant="button"
-              href="#"
+              href="/Invocador"
               sx={{ my: 1, mx: 1.5, color: "#FFFF" }}
             >
               Invocador
             </Link>
             <Link
               variant="button"
-              href="#"
+              href="/Support"
               sx={{ my: 1, mx: 1.5, color: "#FFFF"}}
             >
               Support
